@@ -75,6 +75,7 @@ func (n Node) Merge(other Node) *Node {
 		Mount:    n.Mount,
 		Path:     n.Path,
 		Subtree:  n.Subtree,
+		Comment:  n.Comment,
 	}
 
 	// During a merge we can't change the name.
