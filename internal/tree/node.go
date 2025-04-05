@@ -14,6 +14,7 @@ type Node struct {
 	Mount    bool
 	Path     string
 	Subtree  *Tree
+	Comment  string
 }
 
 const (
@@ -148,6 +149,7 @@ func (n *Node) format(prefix string, last bool, maxDepth, curDepth int) string {
 	default:
 		_, _ = out.WriteString(n.Name)
 	}
+	out.WriteString(" "+n.Comment)
 	// mark templates
 	if n.Template {
 		_, _ = out.WriteString(" " + colTpl("(template)"))

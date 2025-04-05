@@ -25,6 +25,7 @@ func (r *Store) List(ctx context.Context, maxDepth int) ([]string, error) {
 // Tree returns the tree representation of the entries.
 func (r *Store) Tree(ctx context.Context) (*tree.Root, error) {
 	root := tree.New("gopass")
+	root.Path = r.Path()
 	addFileFunc := func(in ...string) {
 		for _, f := range in {
 			var ct string

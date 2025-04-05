@@ -2,6 +2,7 @@ package tree
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -33,6 +34,7 @@ type Root struct {
 	Name    string
 	Subtree *Tree
 	Prefix  string
+	Path	string
 }
 
 // New creates a new tree.
@@ -60,7 +62,7 @@ func (r *Root) AddTemplate(path string) error {
 
 func (r *Root) insert(path string, template bool, mountPath string) error {
 	t := r.Subtree
-
+	t.Path = r.Path 
 	debug.V(4).Log("adding: %s [tpl: %t, mp: %q]", path, template, mountPath)
 
 	// split the path into its components, iterate over them and create
@@ -71,6 +73,11 @@ func (r *Root) insert(path string, template bool, mountPath string) error {
 			Name:    e,
 			Subtree: NewTree(),
 		}
+		n.Subtree.Path = filepath.Join(t.Path, e)
+
+		comment, _ := os.ReadFile(n.Subtree.Path+".comment")
+		n.Comment = strings.TrimSpace(string(comment))
+	
 		// this is the final element (a leaf)
 		if i == len(p)-1 {
 			n.Leaf = true

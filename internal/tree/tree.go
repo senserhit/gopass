@@ -14,6 +14,7 @@ var ErrNodePresent = fmt.Errorf("node already present")
 // Tree is a tree.
 type Tree struct {
 	Nodes []*Node
+	Path string
 }
 
 // NewTree creates a new tree.
