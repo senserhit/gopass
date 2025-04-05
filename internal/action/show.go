@@ -99,7 +99,8 @@ func (s *Action) Show(c *cli.Context) error {
 // show displays the given secret/key.
 func (s *Action) show(ctx context.Context, c *cli.Context, name string, recurse bool) error {
 	if name == "" {
-		return exit.Error(exit.Usage, nil, "Usage: %s show [name]", s.Name)
+	    name = "/"
+		//return exit.Error(exit.Usage, nil, "Usage: %s show [name]", s.Name)
 	}
 
 	if s.Store.IsDir(ctx, name) && !s.Store.Exists(ctx, name) {
