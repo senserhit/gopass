@@ -473,6 +473,11 @@ func (s *Action) GetCommands() []*cli.Command {
 					Aliases: []string{"r"},
 					Usage:   "Interpret pattern as RE2 regular expression",
 				},
+				&cli.BoolFlag{
+					Name:    "ignore-case",
+					Aliases: []string{"i"},
+					Usage:   "Ignore case when searching",
+				},
 			},
 		},
 		{
